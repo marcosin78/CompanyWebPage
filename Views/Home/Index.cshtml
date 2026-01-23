@@ -4,5 +4,25 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Welcome to our company website. We are glad to have you here.</p>
+</div>
+
+<div class="login-container">
+    <form>
+        <label for="user" class="login-label">USER</label>
+        <input type="text" id="user" class="login-input" />
+
+        <label for="pass" class="login-label">PASS</label>
+        <input type="password" id="pass" class="login-input" />
+
+        <button type="submit" class="login-button">ENTER</button>
+    </form>
+</div>
+
+<div class="text-center">
+    <h1 class="display-4">Are not in the company yet?</h1>
+</div>
+
+<div class="register-container text-center">
+    <button class="register-button" onclick="window.location.href='/Home/Register'">REGISTER</button>
 </div>

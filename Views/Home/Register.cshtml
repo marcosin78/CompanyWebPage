@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">Register Page</h1>
+    <p>Set your credentials here</p>
+</div>
+
+<div class="login-container">
+    <form method="post" asp-action="Register">
+        <label for="user" class="login-label">USER</label>
+        <input type="text" id="user" name="Username" class="login-input" />
+
+        <label for="pass" class="login-label">PASS</label>
+        <input type="password" id="pass" name="Password" class="login-input" />
+
+        <label for="pass" class="login-label">CONFIRM PASS</label>
+        <input type="password" id="pass" name="ConfirmPassword" class="login-input" />
+
+        <button type="submit" class="login-button">REGISTER</button>
+    </form>
+</div>
