@@ -7,17 +7,19 @@
     <p>Welcome to our company website. We are glad to have you here.</p>
 </div>
 
-<div class="login-container">
-    <form>
-        <label for="user" class="login-label">USER</label>
-        <input type="text" id="user" class="login-input" />
+<form asp-action="Login" method="post" class="login-container">
+    <label for="user" class="login-label">USER</label>
+    <input type="text" id="user" name="user" class="login-input" />
 
-        <label for="pass" class="login-label">PASS</label>
-        <input type="password" id="pass" class="login-input" />
+    <label for="pass" class="login-label">PASS</label>
+    <input type="password" id="pass" name="pass" class="login-input" />
 
-        <button type="submit" class="login-button">ENTER</button>
-    </form>
-</div>
+    <button type="submit" class="login-button">ENTER</button>
+</form>
+@if (ViewBag.LoginError != null)
+{
+    <div class="text-danger">@ViewBag.LoginError</div>
+}
 
 <div class="text-center">
     <h1 class="display-4">Are not in the company yet?</h1>

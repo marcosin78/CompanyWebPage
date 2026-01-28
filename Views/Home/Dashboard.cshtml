@@ -1,0 +1,50 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<div class="dashboard-container">
+    <header class="dashboard-header">
+        <h1>BRAVO COMPANY</h1>
+        <div class="dashboard-department">
+            DEPARTAMENTO | <span>GENERAL</span>
+        </div>
+    </header>
+    <div class="dashboard-body">
+        <nav class="dashboard-sidebar">
+            <ul>
+                <li>PERFIL</li>
+                <li>MENSAJES</li>
+                <li>POST</li>
+                <li>CONFIG</li>
+            </ul>
+        </nav>
+        <main class="dashboard-main">
+            <section class="dashboard-post">
+                <div class="dashboard-user">USER</div>
+                <div class="dashboard-content">
+                    <!-- Aquí va la imagen o contenido del post -->
+                    <img src="https://via.placeholder.com/150" alt="Imagen de post" />
+                </div>
+            </section>
+            <section class="dashboard-post">
+                <div class="dashboard-user">USER</div>
+                <div class="dashboard-content">
+                    <!-- Aquí va el texto del post -->
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </section>
+        </main>
+        <aside class="dashboard-widgets">
+            <div class="dashboard-widget">
+                <!-- Aquí va el check o icono -->
+                <input type="checkbox" />
+            </div>
+            <div class="dashboard-widget">
+                <!-- Aquí va el calendario o widget -->
+                <table>
+                    <tr><td>L</td><td>M</td><td>X</td><td>J</td><td>V</td></tr>
+                    <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+                </table>
+            </div>
+        </aside>
+    </div>
+</div>
