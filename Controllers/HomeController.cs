@@ -108,4 +108,12 @@ public class HomeController : Controller
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return RedirectToAction("Index");
     }
+    [HttpPost]
+    public async Task<IActionResult> Post(string Text, IFormFile Image)
+    {
+        // Aquí puedes guardar el post en la base de datos y la imagen si se sube
+        // Por ahora solo redirige al dashboard
+        return RedirectToAction("Dashboard");
+    }
+
 }

@@ -15,12 +15,16 @@
     </form>
     <div class="dashboard-body">
         <nav class="dashboard-sidebar">
-            <ul>
-                <li>PERFIL</li>
-                <li>MENSAJES</li>
-                <li>POST</li>
-                <li>CONFIG</li>
-            </ul>
+            <form method="post" asp-action="Perfil">
+                <button type="submit" class="sidebar-btn">PERFIL</button>
+            </form>
+            <form method="post" asp-action="Mensajes">
+                <button type="submit" class="sidebar-btn">MENSAJES</button>
+            </form>
+            <button type="button" id="open-post-canvas-btn" class="sidebar-btn">POST</button>
+            <form method="post" asp-action="Config">
+                <button type="submit" class="sidebar-btn">CONFIG</button>
+            </form>
         </nav>
         <main class="dashboard-main">
             <section class="dashboard-post">
@@ -53,3 +57,7 @@
         </aside>
     </div>
 </div>
+
+@await Html.PartialAsync("_PostCanvas")
+
+<script src="~/js/dashboard.js"></script>

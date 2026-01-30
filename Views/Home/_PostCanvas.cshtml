@@ -1,0 +1,23 @@
+<div id="post-canvas-overlay" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);display:none;z-index:1000;">
+    <div style="background:#fff;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:32px 24px 16px 24px;border-radius:16px;min-width:350px;box-shadow:0 4px 32px #0002;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+                <button type="button" id="font-btn" title="Cambiar fuente">A</button>
+                <button type="button" id="size-btn" title="Cambiar tamaño">aA</button>
+            </div>
+            <button type="button" id="close-canvas-btn" style="font-size:20px;">✖</button>
+        </div>
+        <form id="post-form" asp-action="Post" method="post" enctype="multipart/form-data">
+            <textarea name="Text" id="post-text" placeholder="Texto" style="width:100%;height:120px;margin:16px 0;resize:vertical;"></textarea>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+                <label style="cursor:pointer;">
+                    <input type="file" name="Image" id="img-input" style="display:none;" accept="image/*" />
+                    <span style="font-size:22px;">🖼️</span>
+                </label>
+                <button type="submit" style="padding:8px 32px;border-radius:12px;background:#222;color:#fff;">POST</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
