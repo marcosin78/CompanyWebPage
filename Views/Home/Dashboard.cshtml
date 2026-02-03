@@ -1,6 +1,7 @@
 @{
     ViewData["Title"] = "Dashboard";
 }
+@model List<CompanyWebMarcBravo.Models.Post>
 <div class="dashboard-container">
     <header class="dashboard-header">
         <h1>BRAVO COMPANY</h1>
@@ -27,20 +28,32 @@
             </form>
         </nav>
         <main class="dashboard-main">
-            <section class="dashboard-post">
-                <div class="dashboard-user">USER</div>
-                <div class="dashboard-content">
-                    <!-- Aquí va la imagen o contenido del post -->
-                    <img src="https://via.placeholder.com/150" alt="Imagen de post" />
+                <!-- Sección vacía para los posts de los trabajadores -->
+                <section id="worker-posts">
+                    <!-- Aquí se añadirán dinámicamente los posts de los trabajadores -->
+
+                     @if (Model != null && Model.Count > 0)
+    {
+        foreach (var post in Model)
+        {
+            <div class="post-card" style="border:1px solid #ddd;border-radius:12px;padding:16px;margin-bottom:16px;background:#fff;box-shadow:0 2px 8px #0001;">
+                <div style="display:flex;align-items:center;">
+                    <span style="font-weight:bold;">@post.Username</span>
+                    <span style="color:#888;font-size:12px;margin-left:8px;">@post.CreatedAt.ToString("g")</span>
                 </div>
-            </section>
-            <section class="dashboard-post">
-                <div class="dashboard-user">USER</div>
-                <div class="dashboard-content">
-                    <!-- Aquí va el texto del post -->
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-            </section>
+                <div style="margin:12px 0;">@post.Text</div>
+                @if (!string.IsNullOrEmpty(post.ImagePath))
+                {
+                    <img src="@post.ImagePath" alt="Post image" style="max-width:100%;border-radius:8px;margin-top:8px;" />
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <div>No hay posts todavía.</div>
+    }
+                </section>
         </main>
         <aside class="dashboard-widgets">
             <div class="dashboard-widget">

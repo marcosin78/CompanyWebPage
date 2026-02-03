@@ -36,7 +36,10 @@ public class HomeController : Controller
     }
     public IActionResult Dashboard()
     {
-        return View();
+            var posts = _context.Posts
+        .OrderByDescending(p => p.CreatedAt)
+        .ToList();
+        return View(posts);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -113,6 +116,33 @@ public class HomeController : Controller
     {
         // Aquí puedes guardar el post en la base de datos y la imagen si se sube
         // Por ahora solo redirige al dashboard
+
+        string imagePath = null;
+
+        //Guardar la imagen si se proporciona 
+        if (Image != null && Image.Length > 0)
+    {
+        var fileName = Guid.NewGuid() + Path.GetExtension(Image.FileName);
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
+
+        using (var stream = new FileStream(path, FileMode.Create))
+        {
+            await Image.CopyToAsync(stream);
+        }
+        imagePath = "/images/" + fileName;
+    }
+        
+    // Crear el post
+    var post = new Post
+    {
+        Username = User.Identity.Name ?? "Anonimo",
+        Text = Text,
+        ImagePath = imagePath,
+        CreatedAt = DateTime.Now
+    };
+        _context.Posts.Add(post);
+    await _context.SaveChangesAsync();
+
         return RedirectToAction("Dashboard");
     }
 
