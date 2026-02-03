@@ -39,6 +39,11 @@ public class HomeController : Controller
             var posts = _context.Posts
         .OrderByDescending(p => p.CreatedAt)
         .ToList();
+
+            // Obtener el usuario actual
+        var usuario = _context.Users.FirstOrDefault(u => u.Username == User.Identity.Name);
+        ViewBag.UserDepartmentId = usuario?.DepartmentId;
+
         return View(posts);
     }
 
@@ -112,14 +117,10 @@ public class HomeController : Controller
         return RedirectToAction("Index");
     }
     [HttpPost]
-    public async Task<IActionResult> Post(string Text, IFormFile Image)
+    public async Task<IActionResult> Post(string Text, IFormFile Image, int? departmentId)
     {
-        // Aquí puedes guardar el post en la base de datos y la imagen si se sube
-        // Por ahora solo redirige al dashboard
-
         string imagePath = null;
 
-        //Guardar la imagen si se proporciona 
         if (Image != null && Image.Length > 0)
     {
         var fileName = Guid.NewGuid() + Path.GetExtension(Image.FileName);
@@ -132,13 +133,13 @@ public class HomeController : Controller
         imagePath = "/images/" + fileName;
     }
         
-    // Crear el post
     var post = new Post
     {
         Username = User.Identity.Name ?? "Anonimo",
         Text = Text,
         ImagePath = imagePath,
-        CreatedAt = DateTime.Now
+        CreatedAt = DateTime.Now,
+        DepartmentId = departmentId // Aquí se guarda el ID del departamento
     };
         _context.Posts.Add(post);
     await _context.SaveChangesAsync();

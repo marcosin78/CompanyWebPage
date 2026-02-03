@@ -9,6 +9,7 @@
         </div>
         <form id="post-form" asp-action="Post" method="post" enctype="multipart/form-data">
             <textarea name="Text" id="post-text" placeholder="Texto" style="width:100%;height:120px;margin:16px 0;resize:vertical;"></textarea>
+            <input type="hidden" name="DepartmentId" value="@ViewBag.UserDepartmentId" />
             <div style="display:flex;justify-content:space-between;align-items:center;">
                 <label style="cursor:pointer;">
                     <input type="file" name="Image" id="img-input" style="display:none;" accept="image/*" />
