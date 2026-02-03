@@ -145,5 +145,20 @@ public class HomeController : Controller
 
         return RedirectToAction("Dashboard");
     }
+    [HttpPost]
+public async Task<IActionResult> DeletePost(int id)
+{
+    var post = await _context.Posts.FindAsync(id);
+    if (post == null)
+        return NotFound();
+
+    // Solo permite borrar si el usuario es el creador
+    if (User.Identity?.Name != post.Username)
+        return Forbid();
+
+    _context.Posts.Remove(post);
+    await _context.SaveChangesAsync();
+    return RedirectToAction("Dashboard");
+}
 
 }
