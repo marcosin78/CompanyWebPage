@@ -34,15 +34,28 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult Dashboard()
+    public IActionResult Dashboard(string filter = "general")
     {
-            var posts = _context.Posts
-        .OrderByDescending(p => p.CreatedAt)
-        .ToList();
-
-            // Obtener el usuario actual
         var usuario = _context.Users.FirstOrDefault(u => u.Username == User.Identity.Name);
         ViewBag.UserDepartmentId = usuario?.DepartmentId;
+        ViewBag.SelectedDepartment = filter;
+
+        List<Post> posts;
+
+        if (filter == "department" && usuario?.DepartmentId != null)
+        {
+            posts = _context.Posts
+                .Where(p => p.DepartmentId == usuario.DepartmentId)
+                .OrderByDescending(p => p.CreatedAt)
+                .ToList();
+        }
+        else
+        {
+            posts = _context.Posts
+                .Where(p => p.DepartmentId == null)
+                .OrderByDescending(p => p.CreatedAt)
+                .ToList();
+        }
 
         return View(posts);
     }
@@ -74,30 +87,20 @@ public class HomeController : Controller
     [HttpPost]
     public async Task<IActionResult> Login(string user, string pass)
     {
-        //Reemplazar con la logica de acceso a la base de datos para validar el usuario
-        bool isValid=false;
+        var usuario = _context.Users.FirstOrDefault(u => u.Username == user && u.Password == pass);
 
-        isValid = _context.Users.Any(u => u.Username == user && u.Password == pass);
-
-        Console.WriteLine($"isValid: {isValid}");
-
-        if (isValid)
+        if (usuario != null)
         {
-
-            //Crear claims
-
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user)
+                new Claim(ClaimTypes.Name, user),
+                new Claim(ClaimTypes.Role, usuario.Role.ToString()) // <-- Usa el rol real
             };
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            //Guardar cookie
-
-              // Guardar la cookie
             await HttpContext.SignInAsync(
-            CookieAuthenticationDefaults.AuthenticationScheme,
-            new ClaimsPrincipal(claimsIdentity));
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity));
 
             return RedirectToAction("Dashboard");
             

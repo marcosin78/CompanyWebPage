@@ -1,12 +1,21 @@
 @{
     ViewData["Title"] = "Dashboard";
+    var selectedDept = ViewBag.SelectedDepartment as string ?? "general";
+    var userDeptId = ViewBag.UserDepartmentId?.ToString();
 }
 @model List<CompanyWebMarcBravo.Models.Post>
 <div class="dashboard-container">
     <header class="dashboard-header">
         <h1>BRAVO COMPANY</h1>
         <div class="dashboard-department">
-            DEPARTAMENTO | <span>GENERAL</span>
+            <form method="get" asp-action="Dashboard" style="display:inline;">
+                <input type="hidden" name="filter" value="general" />
+                <button type="submit" class="dept-btn" style="@(selectedDept == "general" ? "font-weight:bold;" : "")">GENERAL</button>
+            </form>
+            <form method="get" asp-action="Dashboard" style="display:inline;">
+                <input type="hidden" name="filter" value="department" />
+                <button type="submit" class="dept-btn" style="@(selectedDept == "department" ? "font-weight:bold;" : "")">MI DEPARTAMENTO</button>
+            </form>
         </div>
     </header>
     <form asp-action="Logout" method="post" style="position: absolute; top: 10px; right: 20px;">
