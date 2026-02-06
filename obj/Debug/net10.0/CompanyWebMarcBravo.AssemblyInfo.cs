@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CompanyWebMarcBravo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+317860039cb5357e1c7a2afd8e1821a30750df62")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d73c39b41fc18fb6ece562d19cb5eb5e0de45eca")]
 [assembly: System.Reflection.AssemblyProductAttribute("CompanyWebMarcBravo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CompanyWebMarcBravo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "Administración";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="admin-sections">
+    <section class="admin-section">
+        <h2>Gestión de Usuarios</h2>
+        <ul>
+            <li><a asp-action="UserList">Ver usuarios</a></li>
+            <li>
+             <button type="button" id="open-create-user-modal-btn">Crear usuario</button>
+            </li>
+        </ul>
+    </section>
+    <section class="admin-section">
+        <h2>Gestión de Departamentos</h2>
+        <ul>
+            <li><a asp-action="DepartmentList">Ver departamentos</a></li>
+            <li><a asp-action="CreateDepartment">Crear departamento</a></li>
+        </ul>
+    </section>
+    <section class="admin-section">
+        <h2>Gestión de Posts</h2>
+        <ul>
+            <li><a asp-action="PostList">Ver posts</a></li>
+        </ul>
+    </section>
+</div>
+
+@await Html.PartialAsync("_CreateUserCode")
+<script src="~/js/admin.js"></script>
+
+<style>
+.admin-sections {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+}
+.admin-section {
+    background: #f8f9fa;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #0001;
+    min-width: 220px;
+}
+.admin-section h2 {
+    font-size: 1.2em;
+    margin-bottom: 12px;
+}
+.admin-section ul {
+    list-style: none;
+    padding: 0;
+}
+.admin-section li {
+    margin-bottom: 8px;
+}
+</style>

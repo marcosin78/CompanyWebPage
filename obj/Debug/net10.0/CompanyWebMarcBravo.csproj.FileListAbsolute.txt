@@ -204,3 +204,4 @@ C:\Users\marcb\OneDrive\Desktop\Proyecto Pagina Web Base de Datos C#\CompanyWebM
 C:\Users\marcb\OneDrive\Desktop\Proyecto Pagina Web Base de Datos C#\CompanyWebMarcBravo\obj\Debug\net10.0\CompanyWebMarcBravo.pdb
 C:\Users\marcb\OneDrive\Desktop\Proyecto Pagina Web Base de Datos C#\CompanyWebMarcBravo\obj\Debug\net10.0\CompanyWebMarcBravo.genruntimeconfig.cache
 C:\Users\marcb\OneDrive\Desktop\Proyecto Pagina Web Base de Datos C#\CompanyWebMarcBravo\obj\Debug\net10.0\ref\CompanyWebMarcBravo.dll
+C:\Users\marcb\OneDrive\Desktop\Proyecto Pagina Web Base de Datos C#\CompanyWebMarcBravo\obj\Debug\net10.0\compressed\xwxdbvwov8-{0}-ynlfi3716k-ynlfi3716k.gz

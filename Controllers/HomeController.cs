@@ -30,6 +30,12 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult Admin()
+    {
+        ViewBag.Departments = _context.Departments.ToList();   
+
+        return View();
+    }
     public IActionResult Register()
     {
         return View();
@@ -67,21 +73,34 @@ public class HomeController : Controller
     }
     
         [HttpPost]
-    public async Task<IActionResult> Register(string Username, string Password, string ConfirmPassword)
+    public async Task<IActionResult> Register(string Username, string Password, string ConfirmPassword, string InviteCode)
     {
-        // Validación simple de contraseñas
         if (Password != ConfirmPassword)
         {
             ViewBag.Error = "Las contraseñas no coinciden.";
             return View();
         }
 
-        // Crear y guardar el usuario
-        var user = new User { Username = Username, Password = Password };
+        var invite = _context.InviteCodes.FirstOrDefault(i => i.Code == InviteCode);
+        if (invite == null)
+        {
+            ViewBag.Error = "Código de invitación inválido o ya usado.";
+            return View();
+        }
+
+        var user = new User
+        {
+            Username = Username,
+            Password = Password,
+            DepartmentId = invite.DepartmentId
+        };
         _context.Users.Add(user);
+
+        // Eliminar el código tras usarlo
+        _context.InviteCodes.Remove(invite);
+
         await _context.SaveChangesAsync();
 
-        // Redirigir o mostrar mensaje de éxito
         return RedirectToAction("Index");
     }
     [HttpPost]
@@ -164,5 +183,17 @@ public async Task<IActionResult> DeletePost(int id)
     await _context.SaveChangesAsync();
     return RedirectToAction("Dashboard");
 }
-
+[HttpPost]
+public IActionResult GenerateUserCode(int DepartmentId, string Code)
+{
+    var invite = new InviteCode
+    {
+        Code = Code,
+        DepartmentId = DepartmentId
+    };
+    _context.InviteCodes.Add(invite);
+    _context.SaveChanges();
+    TempData["Success"] = "Código guardado correctamente.";
+    return RedirectToAction("Admin");
+}
 }
